@@ -190,3 +190,39 @@ async def test_list_users_unauthorized(async_client, user_token):
         headers={"Authorization": f"Bearer {user_token}"}
     )
     assert response.status_code == 403  # Forbidden, as expected for regular user
+
+# Try to reset invalid email
+@pytest.mark.asyncio
+async def test_password_reset_invalid_email(async_client):
+    response = await async_client.post("/password-reset/request", json={"email": "nonexistent@example.com"})
+    assert response.status_code == 404
+
+# Try to change password 
+@pytest.mark.asyncio
+async def test_change_password_unauthorized(async_client, user_token):
+    headers = {"Authorization": f"Bearer {user_token}"}
+    password_change = {
+        "current_password": "MySuperPassword$1234",
+        "new_password": "NewPassword123!"
+    }
+    response = await async_client.post("/users/change-password", json=password_change, headers=headers)
+    assert response.status_code == 405
+
+@pytest.mark.asyncio
+async def test_create_user_weak_password(async_client):
+    user_data = {
+        "email": "weakpass@example.com",
+        "password": "weak",  # Too short or simple
+        "nickname": generate_nickname()
+    }
+    response = await async_client.post("/register/", json=user_data)
+    assert response.status_code == 422  # Validation error
+
+@pytest.mark.asyncio
+async def test_create_user_missing_required_fields(async_client):
+    user_data = {
+        "email": "incomplete@example.com"
+    }
+    response = await async_client.post("/register/", json=user_data)
+    assert response.status_code == 422
+    
