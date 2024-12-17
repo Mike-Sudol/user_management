@@ -108,3 +108,40 @@ def test_user_base_url_invalid(url, user_base_data):
     user_base_data["profile_picture_url"] = url
     with pytest.raises(ValidationError):
         UserBase(**user_base_data)
+
+
+def test_user_base_empty_optional_fields(user_base_data):
+    """Test that optional fields can be None or empty"""
+    user_base_data.update({
+        "first_name": None,
+        "last_name": None,
+        "bio": None,
+        "profile_picture_url": None,
+        "linkedin_profile_url": None,
+        "github_profile_url": None
+    })
+    user = UserBase(**user_base_data)
+    assert user.first_name is None
+    assert user.last_name is None
+
+@pytest.mark.parametrize("invalid_role", [
+    "SUPERADMIN",  # Not in the defined roles
+    "admin",       # Case-sensitive
+    123            # Wrong type
+])
+def test_user_base_invalid_role(invalid_role, user_base_data):
+    """Test invalid role assignments"""
+    user_base_data["role"] = invalid_role
+    with pytest.raises(ValidationError):
+        UserBase(**user_base_data)
+
+@pytest.mark.parametrize("url", [
+    "http://sub.domain.com/path/to/resource",
+    "https://domain.com:8080/path",
+    "http://localhost/resource"
+])
+def test_additional_url_formats(url, user_base_data):
+    """Test additional valid URL formats"""
+    user_base_data["profile_picture_url"] = url
+    user = UserBase(**user_base_data)
+    assert user.profile_picture_url == url
