@@ -161,3 +161,31 @@ async def test_unlock_user_account(db_session, locked_user):
     assert unlocked, "The account should be unlocked"
     refreshed_user = await UserService.get_by_id(db_session, locked_user.id)
     assert not refreshed_user.is_locked, "The user should no longer be locked"
+
+# Test Role Changes
+async def test_unauthorized_role_changes(db_session, user):
+    """
+    Verify that certain role changes are not allowed
+    """
+    # Attempt to change role to an unauthorized value
+    updated_user = await UserService.update(db_session, user.id, {"role": UserRole.ADMIN})
+    
+    # Depending on implementation, this might return None or keep the original role
+    if updated_user:
+        assert updated_user.role != UserRole.ADMIN
+
+# Test User Deletion and Subsequent Operations
+async def test_operations_on_deleted_user(db_session, user):
+    """
+    Verify that operations on a deleted user fail
+    """
+    # Delete the user
+    await UserService.delete(db_session, user.id)
+    
+    # Try to fetch the deleted user
+    deleted_user = await UserService.get_by_id(db_session, user.id)
+    assert deleted_user is None
+    
+    # Try to update the deleted user
+    updated_user = await UserService.update(db_session, user.id, {"email": "new_email@example.com"})
+    assert updated_user is None
