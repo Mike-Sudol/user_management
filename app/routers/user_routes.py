@@ -239,14 +239,46 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), session: Async
     raise HTTPException(status_code=401, detail="Incorrect email or password.")
 
 
-@router.get("/verify-email/{user_id}/{token}", status_code=status.HTTP_200_OK, name="verify_email", tags=["Login and Registration"])
-async def verify_email(user_id: UUID, token: str, db: AsyncSession = Depends(get_db), email_service: EmailService = Depends(get_email_service)):
+@router.get("/verify-email/{user_id}/{token}", 
+            status_code=status.HTTP_200_OK, 
+            name="verify_email", 
+            tags=["Authentication"],
+            responses={
+                400: {"description": "Invalid or expired token"},
+                404: {"description": "User not found"}
+            })
+async def verify_email(
+    user_id: UUID, 
+    token: str, 
+    db: AsyncSession = Depends(get_db), 
+    email_service: EmailService = Depends(get_email_service)
+):
     """
-    Verify user's email with a provided token.
+    Verify user's email with provided token.
     
-    - **user_id**: UUID of the user to verify.
-    - **token**: Verification token sent to the user's email.
+    Args:
+        user_id: UUID of the user
+        token: Verification token
+        db: Database session
+        email_service: Email service instance
+    
+    Returns:
+        dict: Success message
+        
+    Raises:
+        HTTPException: If token is invalid or expired
     """
+    user = await UserService.get_by_id(db, user_id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
     if await UserService.verify_email_with_token(db, user_id, token):
         return {"message": "Email verified successfully"}
-    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired verification token")
+    
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Invalid or expired verification token"
+    )
