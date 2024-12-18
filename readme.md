@@ -1,29 +1,38 @@
 # The User Management System Final Project: Your Epic Coding Adventure Awaits! 🎉✨🔥
+## Tests
 
-## Submission and Grading: Your Chance to Shine 📝✏️📈
+## Paper
+Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project.
 
-1. **Reflection Document**: Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project. Include links to the closed issues for the **5 QA issues, 10 NEW tests, and 1 Feature** you'll be graded on. Make sure your project successfully deploys to DockerHub and include a link to your Docker repository in the document - let your work speak for itself! 📄🔗💥
+## Features
+[Choose a feature](features.md) from the provided list of additional improvements that sparks your interest and aligns with your goals like a laser beam. ✨⭐🎯 This is your chance to shine!
 
-2. **Commit History**: Show off your consistent hard work through your commit history like a true coding warrior. **Projects with less than 10 commits will get an automatic 0 - ouch!** 😬⚠️ A significant part of your project's evaluation will be based on your use of issues, commits, and following a professional development process like a boss - prove your coding prowess! 💻🔄🔥
+## Issues
 
-3. **Deployability**: Broken projects that don't deploy to Dockerhub or pass all the automated tests on GitHub actions will face point deductions - nobody likes a buggy app! 🐞☠️ Show the world your flawless coding skills!
+1. **User Deletion Validation**: [Link](https://github.com/Mike-Sudol/user_management/issues/2)
+   
+Currently we are not checking if the user is an admin before they delete a user, lets fix this this by checking in the function first.
 
-## Managing the Project Workload: Stay Focused, Stay Victorious ⏱️🧠⚡
 
-This project requires effective time management and a well-planned strategy, but fear not - you've got this! Follow these steps to ensure a successful (and sane!) project outcome:
+2. **Database Issues**: [Link](https://github.com/Mike-Sudol/user_management/issues/8)
+   
+The way we are allocating database instances to our services is heavily suboptimal
 
-1. **Select a Feature**: [Choose a feature](features.md) from the provided list of additional improvements that sparks your interest and aligns with your goals like a laser beam. ✨⭐🎯 This is your chance to shine!
+3. **Race Condition**[Link](https://github.com/Mike-Sudol/user_management/issues/6):
+   
+We have a potential infinite loop in an await that really slows down our execution or can stop the program all together, lets add a limit to how many times we check in the while before exiting.
+   
 
-2. **Quality Assurance (QA)**: Thoroughly test the system's major functionalities related to your chosen feature and identify at least 5 issues or bugs like a true detective. Create GitHub issues for each identified problem, providing detailed descriptions and steps to reproduce - the more detail, the merrier! 🔍🐞🕵️‍♀️ Leave no stone unturned!
+4. **Email validation**: [Link](https://github.com/Mike-Sudol/user_management/issues/4)
+   
+When we verify emails, we aren't checking if they exist before we pass them on, lets fix this by checking first.
 
-3. **Test Coverage Improvement**: Review the existing test suite and identify gaps in test coverage like a pro. Create 10 additional tests to cover edge cases, error scenarios, and important functionalities related to your chosen feature. Focus on areas such as user registration, login, authorization, and database interactions. Simulate the setup of the system as the admin user, then creating users, and updating user accounts - leave no stone unturned, no bug left behind! ✅🧪🔍🔬 Become the master of testing!
+5. **CVEs and Conflicting Dependencies**: [Link](https://github.com/Mike-Sudol/user_management/issues/1)
+    
+Currently we have CVEs in our software as well as dependencies that are conflicting with each other, we need to change our requirements.txt to fix this
 
-4. **New Feature Implementation**: Implement your chosen feature, following the project's coding practices and architecture like a coding ninja. Write appropriate tests to ensure your new feature is functional and reliable like a rock. Document the new feature, including its usage, configuration, and any necessary migrations - future you will thank you profusely! 🚀✨📝👩‍💻⚡ Make your mark on this project!
+## Dockerhub
+Make sure your project successfully deploys to DockerHub and include a link to your Docker repository in the document
 
-5. **Maintain a Working Main Branch**: Throughout the project, ensure you always have a working main branch deploying to Docker like a well-oiled machine. This will prevent any last-minute headaches and ensure a smooth submission process - no tears allowed, only triumphs! 😊🚢⚓ Stay focused, stay victorious!
-
-Remember, it's more important to make something work reliably and be reasonably complete than to implement an overly complex feature. Focus on creating a feature that you can build upon or demonstrate in an interview setting - show off your skills like a rockstar! 💪🚀🎓
-
-Don't forget to always have a working main branch deploying to Docker at all times. If you always have a working main branch, you will never be in jeopardy of receiving a very disappointing grade :-). Keep that main branch shining bright!
-
-Let's embark on this epic coding adventure together and conquer the world of software engineering! You've got this, coding rockstars! 🚀🌟✨
+[Link to project image deployed to Dockerhub](https://hub.docker.com/r/ms2649/user_management/tags)
+![Docker](Docker.png)
