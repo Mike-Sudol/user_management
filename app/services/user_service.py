@@ -133,8 +133,10 @@ class UserService:
         user = await cls.get_by_email(session, email)
         if user:
             if user.email_verified is False:
+                logger.warning(f"Login attempt for unverified email: {email}")
                 return None
             if user.is_locked:
+                logger.warning(f"Login attempt for locked account: {email}")
                 return None
             if verify_password(password, user.hashed_password):
                 user.failed_login_attempts = 0
@@ -143,11 +145,14 @@ class UserService:
                 await session.commit()
                 return user
             else:
-                user.failed_login_attempts += 1
-                if user.failed_login_attempts >= settings.max_login_attempts:
-                    user.is_locked = True
-                session.add(user)
-                await session.commit()
+                # Only increment if account not already locked
+                if not user.is_locked:
+                    user.failed_login_attempts += 1
+                    if user.failed_login_attempts >= settings.max_login_attempts:
+                        user.is_locked = True
+                        logger.warning(f"Account locked due to failed attempts: {email}")
+                    session.add(user)
+                    await session.commit()
         return None
 
     @classmethod
