@@ -60,8 +60,13 @@ class UserService:
             validated_data['hashed_password'] = hash_password(validated_data.pop('password'))
             new_user = User(**validated_data)
             new_nickname = generate_nickname()
+            max_attempts = 100
+            attempts = 0
             while await cls.get_by_nickname(session, new_nickname):
+                if attempts >= max_attempts:
+                    raise ValueError("Could not generate unique nickname after maximum attempts")
                 new_nickname = generate_nickname()
+                attempts += 1
             new_user.nickname = new_nickname
             logger.info(f"User Role: {new_user.role}")
             user_count = await cls.count(session)
