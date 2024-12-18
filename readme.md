@@ -1,5 +1,34 @@
 # The User Management System Final Project: Your Epic Coding Adventure Awaits! 🎉✨🔥
 ## Tests
+[User Schemas](https://github.com/Mike-Sudol/user_management/commit/6b071d05910d7e39f2fd78c567ed74854c28e202#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9R122)
+-test_user_base_empty_optional_fields
+--Tests whether optional fields can be null
+-test_user_base_invalid_role
+--Tests trying add user with non-existent role
+-test_additional_url_formats
+--Tests more url formats
+
+[User Service](https://github.com/Mike-Sudol/user_management/commit/df11fa70c78a81737f8210d0f60d85b4abc5093b#diff-e3f3da0661632e0add5f28cb40266e4bfbd6e0c1a23cdb5f5e8813af69cf1d5cR178)
+-test_unauthorized_role_changes
+--Tests if certain roles can change in the application
+-test_operations_on_deleted_user
+--Tests if you can perform operations on a deleted user
+
+[User API](https://github.com/Mike-Sudol/user_management/commit/f4aad5bbca0c7ed0b1ed7ecb054aa981a5b68ff1)
+-test_password_reset_invalid_email
+--Tests if you can reset an invalid password
+-test_change_password_unauthorized
+--Tests if you can change a password unauthorized
+-test_create_user_weak_password
+--Tests creating a weak password when make a password
+-test_create_user_missing_required_fields
+--Tests registering without having required fields
+
+[User Model](https://github.com/Mike-Sudol/user_management/commit/4566011606a5e0a4b98322e8f1085eece32f6f4e#diff-3a1795b15a01c16c53f898ae3833b49c22b768d8c4fad5e2f1bc9f99be7f913dR145)
+-test_user_soft_delete
+--Tests deleting user from the model
+-test_user_metadata_updates
+--Tests updating user's metadata
 
 ## Paper
 Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project.
