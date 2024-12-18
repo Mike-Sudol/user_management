@@ -96,7 +96,7 @@ Sends notifications to users when their professional status is upgraded.
 
 ## To Run 
 ```
-git clone https://github.com/Sudol/user_management.git
+git clone https://github.com/MikeSudol/user_management.git
 cd user_management
 deactivate
 pip install virtualenv
