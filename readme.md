@@ -1,4 +1,8 @@
 # The User Management System Final Project: Your Epic Coding Adventure Awaits! 🎉✨🔥
+
+## Paper
+Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project.
+
 ## Tests
 [User Schemas](https://github.com/Mike-Sudol/user_management/commit/6b071d05910d7e39f2fd78c567ed74854c28e202#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9R122)
 
@@ -47,6 +51,7 @@
 
 
 [User Model](https://github.com/Mike-Sudol/user_management/commit/4566011606a5e0a4b98322e8f1085eece32f6f4e#diff-3a1795b15a01c16c53f898ae3833b49c22b768d8c4fad5e2f1bc9f99be7f913dR145)
+
 -test_user_soft_delete
 
 --Tests deleting user from the model
@@ -55,12 +60,7 @@
 
 --Tests updating user's metadata
 
-
-## Paper
-Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project.
-
-## Features
-[Choose a feature](features.md) from the provided list of additional improvements that sparks your interest and aligns with your goals like a laser beam. ✨⭐🎯 This is your chance to shine!
+![Coverage](Coverage.png)
 
 ## Issues
 
@@ -86,8 +86,16 @@ When we verify emails, we aren't checking if they exist before we pass them on, 
     
 Currently we have CVEs in our software as well as dependencies that are conflicting with each other, we need to change our requirements.txt to fix this
 
+## Features
+Enhanced the user profile management functionality to allow users to update their profile fields and enable managers and admins to upgrade users to professional status.
+
+Implemented API endpoints for users to update their profile fields, such as name, bio, location, etc.
+Created a separate API endpoint for managers and admins to upgrade a user to professional status.
+Updated the user profile page to display the professional status and allow users to edit their profile fields.
+Sends notifications to users when their professional status is upgraded.
+
+
 ## Dockerhub
-Make sure your project successfully deploys to DockerHub and include a link to your Docker repository in the document
 
 [Link to project image deployed to Dockerhub](https://hub.docker.com/r/ms2649/user_management/tags)
 ![Docker](Docker.png)
