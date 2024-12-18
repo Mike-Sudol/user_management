@@ -94,6 +94,17 @@ Created a separate API endpoint for managers and admins to upgrade a user to pro
 Updated the user profile page to display the professional status and allow users to edit their profile fields.
 Sends notifications to users when their professional status is upgraded.
 
+## To Run 
+```
+git clone https://github.com/Sudol/user_management.git
+cd user_management
+deactivate
+pip install virtualenv
+pip install -r requirements.txt
+virtualenv -p /usr/bin/python3 venv
+source venv/bin/activate
+docker compose up --build -d
+```
 
 ## Dockerhub
 
