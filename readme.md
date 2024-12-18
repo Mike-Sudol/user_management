@@ -1,7 +1,4 @@
-# The User Management System Final Project: Your Epic Coding Adventure Awaits! 🎉✨🔥
-
-## Paper
-Submit a 1-2 page Word document reflecting on your learnings throughout the course and your experience working on this epic project.
+# The User Management System Final Project
 
 ## Tests
 [User Schemas](https://github.com/Mike-Sudol/user_management/commit/6b071d05910d7e39f2fd78c567ed74854c28e202#diff-1d7b620623536f4fb4d120c0d59e8a3ad15f248d9f7af6aa9aa8965cfe923ef9R122)
